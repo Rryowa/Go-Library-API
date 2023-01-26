@@ -8,9 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//1. go run main.go
-//2. in separate terminal send curl request from comments in main()
-
 type book struct {
 	ID       string `json:"id"`
 	Title    string `json:"title"`
@@ -93,17 +90,9 @@ func buyBook(c *gin.Context) {
 
 func main() {
 	router := gin.Default()
-	//To see all books
-	//curl 'localhost:8080/books'
 	router.GET("/books", getAllBooks)
-	//Add book in library
-	//curl 'localhost:8080/books' -i -H "Content-Type: application/json" -d "@body.json" --request "POST"
 	router.POST("/books", createBook)
-	//To see Book by id
-	//curl 'localhost:8080/books/3'
 	router.GET("/books/:id", getBookByID)
-	//To buy 3 Books by id
-	//curl 'localhost:8080/books/buy?id=3&quantity=3' --request "PATCH"
 	router.PATCH("/books/buy", buyBook)
 	router.Run("localhost:8080")
 }
